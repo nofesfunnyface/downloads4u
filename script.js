@@ -1,12 +1,12 @@
 // Firebase configuration (replace with your own config)
 const firebaseConfig = {
-  apiKey: "<YOUR_API_KEY>",
-  authDomain: "<YOUR_AUTH_DOMAIN>",
-  databaseURL: "<YOUR_DATABASE_URL>",
-  projectId: "<YOUR_PROJECT_ID>",
-  storageBucket: "<YOUR_STORAGE_BUCKET>",
-  messagingSenderId: "<YOUR_MESSAGING_SENDER_ID>",
-  appId: "<YOUR_APP_ID>"
+  apiKey: "AIzaSyCWncRAJyIvUYPjatkErWQk6uosOu87mVQ",
+  authDomain: "nofesfunnyface.firebaseapp.com",
+  databaseURL: "https://nofesfunnyface-default-rtdb.firebaseio.com",
+  projectId: "nofesfunnyface",
+  storageBucket: "nofesfunnyface.appspot.com",
+  messagingSenderId: "969631855125",
+  appId: "1:969631855125:web:5fca6e0b298fd4a6c9941c"
 };
 
 // Initialize Firebase
