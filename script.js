@@ -1,3 +1,21 @@
+// Firebase configuration (replace with your own config)
+const firebaseConfig = {
+  apiKey: "<YOUR_API_KEY>",
+  authDomain: "<YOUR_AUTH_DOMAIN>",
+  databaseURL: "<YOUR_DATABASE_URL>",
+  projectId: "<YOUR_PROJECT_ID>",
+  storageBucket: "<YOUR_STORAGE_BUCKET>",
+  messagingSenderId: "<YOUR_MESSAGING_SENDER_ID>",
+  appId: "<YOUR_APP_ID>"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Firebase Realtime Database reference
+const database = firebase.database();
+const messagesRef = database.ref('messages');
+
 // Helper function to create and append a new message element
 function createMessageElement(username, message) {
   const messageElement = document.createElement('div');
@@ -22,6 +40,13 @@ function handleEnterClick() {
     // Show the chat interface
     document.getElementById('username-container').style.display = 'none';
     document.getElementById('chat-container').style.display = 'block';
+
+    // Listen for new messages
+    messagesRef.on('child_added', (snapshot) => {
+      const { username, message } = snapshot.val();
+      const messageElement = createMessageElement(username, message);
+      document.getElementById('chat-messages').appendChild(messageElement);
+    });
   }
 
   usernameInput.value = '';
@@ -33,10 +58,15 @@ function handleSendClick() {
   const message = messageInput.value.trim();
 
   if (message !== '') {
-    // Create a new message element and append it to the chat messages container
+    // Create a new message object
     const username = document.getElementById('username-input').value.trim();
-    const messageElement = createMessageElement(username, message);
-    document.getElementById('chat-messages').appendChild(messageElement);
+    const newMessage = {
+      username: username,
+      message: message
+    };
+
+    // Save the new message to Firebase Realtime Database
+    messagesRef.push(newMessage);
 
     // Clear the message input
     messageInput.value = '';
